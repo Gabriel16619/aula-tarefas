@@ -20,8 +20,8 @@
         //criando um array de tarefas
         let lista = ["Estudar Js", "Estudar SQL", "Estudar Front-End"];
 
-        const form = document.getElementById("form-tarefas");
-        const input = document.getElementById("inputTarefa");
+        const form = document.getElementById("form-tarefa");
+        const input = document.getElementById("input-tarefa");
         const ul = document.getElementById("listaTarefas");
 
         //função para renderizar a lista na tela
@@ -46,6 +46,13 @@
                 //botão excluir
                 let btnExcluir = document.createElement("button")
                 btnExcluir.textContent = "Excluir" 
+
+                btnExcluir.onclick = () =>{
+                    if(confirm('Deseja realmente exluir?'))
+                    lista.splice(index,1)
+                    atualizarLista();
+                }
+
                 
                 //add o botao editar no li
                 li.appendChild(bntEditar);
@@ -54,6 +61,14 @@
                 ul.appendChild(li);
 
             });// forEach acaba aqui
+
+            //ação de add uma tarefa
+            form.addEventListener("submit", function(event){
+                    event.preventDefault();
+                    lista.push(input.value);
+                    input.value = "";
+                    atualizarLista();
+                });
         }
 
         atualizarLista();
