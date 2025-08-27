@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de tarefas</title>
+</head>
+<body>
+    <h2>Minhas tarefas</h2>
+
+    <form id="form-tarefa">
+        <label>Tarefa: </label>
+        <input id="input-tarefa" type="text" placeholder="Digite uma tarefa...">
+        <button type="submit">Adicionar</button> 
+    </form>
+    <h3>Lista de tarefas</h3>
+    <ul id="listaTarefas"></ul>
+
+    <script>
+        //criando um array de tarefas
+        let lista = ["Estudar Js", "Estudar SQL", "Estudar Front-End"];
+
+        const form = document.getElementById("form-tarefas");
+        const input = document.getElementById("inputTarefa");
+        const ul = document.getElementById("listaTarefas");
+
+        //função para renderizar a lista na tela
+        function atualizarLista(){
+            ul.innerHTML = "";
+            lista.forEach((tarefa, index) => {
+                let li = document.createElement("li")
+                li.textContent = tarefa;
+
+                //botao editar
+                let bntEditar = document.createElement("button")
+                bntEditar.textContent = "Editar";
+                bntEditar.onclick = () => {
+                    let nomeTarefa = prompt("digite o novo nome da tarefa: ");
+
+                    if(nomeTarefa){
+                        lista[index] = nomeTarefa;
+                        atualizarLista();
+                    }
+                }
+
+                //botão excluir
+                let btnExcluir = document.createElement("button")
+                btnExcluir.textContent = "Excluir" 
+                
+                //add o botao editar no li
+                li.appendChild(bntEditar);
+                li.appendChild(btnExcluir);
+                //adicionar o li no ul(listaTarefas)
+                ul.appendChild(li);
+
+            });// forEach acaba aqui
+        }
+
+        atualizarLista();
+    </script>
+</body>
+</html>
